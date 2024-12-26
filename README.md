@@ -3,7 +3,7 @@
 网盘聚合搜索，基于FastAPI和aiohttp 对接各种网盘资源搜索接口，通过一个接口请求聚合搜索网盘资源
 
 ## 使用方法
-启动main.py
+启动`main.py`
 
 打开网址：
 http://127.0.0.1:21123/search/xxxx
