@@ -61,5 +61,10 @@ pip install -r requirement.txt
 pip install nuitka 
 python -m nuitka --standalone --onefile  --remove-output main.py
 ```
+## 更新计划
+1. 添加更多接口
+2. 检测是否失效
+3. 性能优化、代码优化
+
 # 交流群
 
