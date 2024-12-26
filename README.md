@@ -1,3 +1,5 @@
+# 一盘搜索API
+
 网盘聚合搜索
 对接各种网盘资源搜索接口，通过一个接口请求聚合搜索网盘资源
 
@@ -61,7 +63,4 @@ pip install nuitka
 python -m nuitka --standalone --onefile  --remove-output main.py
 ```
 # 交流群
-
-
-
 
