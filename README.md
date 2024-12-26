@@ -9,4 +9,10 @@ http://p.kkkob.com/
 `pip install -r requirement.txt`
 
 编译成exe命令：
-`nuitka --standalone --onefile  --remove-output main.py`
+
+`pip install nuitka`
+
+``
+python -m nuitka --standalone --onefile  --remove-output main.py
+``
+
