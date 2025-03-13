@@ -43,8 +43,7 @@ class KKKOB:
         )
         self.token = res.get("token")
 
-
-    async def search(self,keyword: str, path = "/v/api/search"):
+    async def search(self, keyword: str, path="/v/api/search"):
         payload = {
             "name": keyword,
             "token": self.token,
@@ -54,20 +53,20 @@ class KKKOB:
         )
         return res.get('list')
 
-    async def search_batch(self, keyword:str):
+    async def search_batch(self, keyword: str):
         results = await asyncio.gather(*(self.search(keyword, path=x) for x in self.search_paths))
         merged_results = [item for sublist in results for item in sublist]
         return merged_results
 
+
 if __name__ == '__main__':
     kkkob = KKKOB()
+
 
     async def asyncio_run():
         await kkkob.getToken()
         list = await kkkob.search_batch("庆余年")
-        print(json.dumps(list))
+        print(json.dumps(list, ensure_ascii=False))
+
 
     asyncio.run(asyncio_run())
-
-
-
