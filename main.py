@@ -1,7 +1,9 @@
 from fastapi import FastAPI, Query
 from driver.client import search
-app = FastAPI()
 
+app = FastAPI(title="PanFileSearch API",
+    description="网盘文件搜索服务",
+    version="2.0.0")
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
