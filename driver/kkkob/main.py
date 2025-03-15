@@ -1,10 +1,34 @@
 import asyncio
 import json
+import re
+import traceback
+from dataclasses import asdict
 from urllib.parse import urljoin
-
+from driver.model.search_result import SearchResult
 import aiohttp
 
 from driver import error
+from utils.pan_type_util import get_pan_type
+
+
+def parse_links(data: str):
+    lines = data.split('\n')
+    pattern = re.compile(r'链接：(https?://\S+)(?:\s+提取码：(\S+))?')
+    results = []
+    for line in lines:
+        match = pattern.match(line.strip())
+        if match:
+            link = match.group(1)
+            pwd = match.group(2) or ''
+        else:
+            link = line.strip()
+            pwd = ''
+        results.append({
+            "url": link,
+            "pwd": pwd,
+            'type': get_pan_type(link)
+        })
+    return results
 
 
 class KKKOB:
@@ -42,23 +66,36 @@ class KKKOB:
         return res.get("token")
 
     @staticmethod
-    async def search(keyword: str, token: str, endpoint: str, path: str):
+    async def search(keyword: str, token: str, endpoint: str, path: str, **keywords) -> list[SearchResult]:
         payload = {
             "name": keyword,
             "token": token,
         }
-        res = await KKKOB._request(
-            endpoint, "POST", path,
-            headers={"Content-Type": "application/x-www-form-urlencoded"},
-            data=payload
-        )
-        return res.get('list')
-
-    @staticmethod
-    async def search_batch( keyword: str,token: str, endpoint: str, search_paths: list):
-        results = await asyncio.gather(*(KKKOB.search(keyword, token, endpoint, x) for x in search_paths))
-        merged_results = [item for sublist in results for item in sublist]
-        return merged_results
+        try:
+            res = await KKKOB._request(
+                endpoint, "POST", path,
+                headers={"Content-Type": "application/x-www-form-urlencoded"},
+                data=payload
+            )
+        except Exception as e:
+            # traceback.print_exc()
+            return []
+            # 转换原始数据到实体模型
+        raw_list = res.get('list', [])
+        results = []
+        for item in raw_list:
+            parsed = parse_links(item.get('answer'))
+            for parsed_item in parsed:
+                # 确保所有字段存在（使用dict.get处理缺失字段）
+                results.append(SearchResult(
+                    id=item.get('id', ''),
+                    name=item.get('question', ''),
+                    url=parsed_item.get('url', ''),
+                    type=parsed_item.get('type', ''),
+                    pwd=parsed_item.get('pwd', ''),
+                    from_site=keywords.get('from_site', '')
+                ))
+        return results
 
 
 if __name__ == '__main__':
@@ -67,15 +104,8 @@ if __name__ == '__main__':
 
     async def asyncio_run():
         token = await KKKOB.getToken(endpoint)
-        list = await KKKOB.search("庆余年", token, endpoint,"/v/api/search")
-        #list = await KKKOB.search_batch("庆余年", token, endpoint,  [
-        #    "/v/api/search",
-        #    "/v/api/getDJ",
-        #    "/v/api/getJuzi",
-        #    "/v/api/getXiaoyu",
-        #    "/v/api/getSearchX"
-        #])
-        print(json.dumps(list, ensure_ascii=False))
+        list = await KKKOB.search("庆余年", token, endpoint, "/v/api/search")
+        print(json.dumps([asdict(sr) for sr in list], ensure_ascii=False))
 
 
     asyncio.run(asyncio_run())
