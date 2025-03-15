@@ -16,7 +16,7 @@ def parse_links(data: str):
     pattern = re.compile(r'链接：(https?://\S+)(?:\s+提取码：(\S+))?')
     results = []
     for line in lines:
-        match = pattern.match(line.strip())
+        match = pattern.search(line.strip())
         if match:
             link = match.group(1)
             pwd = match.group(2) or ''
@@ -98,14 +98,3 @@ class KKKOB:
         return results
 
 
-if __name__ == '__main__':
-    endpoint = "http://p.kkkob.com/"
-
-
-    async def asyncio_run():
-        token = await KKKOB.getToken(endpoint)
-        list = await KKKOB.search("庆余年", token, endpoint, "/v/api/search")
-        print(json.dumps([asdict(sr) for sr in list], ensure_ascii=False))
-
-
-    asyncio.run(asyncio_run())
