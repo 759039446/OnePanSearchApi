@@ -1,5 +1,7 @@
 from enum import Enum
 import asyncio
+from typing import List
+
 from driver.kkkob import KKKOB
 from utils.collection_util import sort_results_by_key
 from utils.dict_formatter_util import format_dict
@@ -11,7 +13,7 @@ class AsyncEnum(Enum):
     - 版本: v1.2
     """
     ITEM_A = (
-        1, KKKOB.search, "KK大厅",
+        1, KKKOB.search, "kk大厅",
         {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'http://p.kkkob.com/', 'path': '/v/api/search'})
     ITEM_B = (
         2, KKKOB.search, "kk短剧",
@@ -31,6 +33,22 @@ class AsyncEnum(Enum):
         self.function = function
         self.remark = remark  # 成员级备注属性
         self.args = args
+
+    @classmethod
+    def get_enums_by_remark(cls, remarks: list) -> List['AsyncEnum']:
+        """
+        根据remark数组筛选枚举成员
+        Args:
+            remarks: 需要匹配的remark列表
+        Returns:
+            匹配成功的枚举成员列表（按输入顺序）
+        """
+        if not remarks:
+            return []
+
+        # 构建 remark到枚举的映射
+        remark_map = {member.remark: member for member in cls}
+        return [remark_map[remark] for remark in remarks if remark in remark_map]
 
     @staticmethod
     async def async_handler(enum_item: Enum, **kwargs):

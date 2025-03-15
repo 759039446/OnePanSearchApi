@@ -8,7 +8,7 @@ class SearchResult:
     url: str
     type: str
     pwd: str
-    from_site: str
+    fromSite: str
 
     def __getitem__(self, field_name: str) -> any:
         return getattr(self, field_name)
