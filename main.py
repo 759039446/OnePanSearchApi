@@ -56,7 +56,7 @@ async def search_pan(
     filtered_results = [
         res
         for res in results
-        if (not type or res['type'] == type)
+        if (not source.type or res['type'] == source.type)
     ]
     total = len(filtered_results)
     start = (source.page - 1) * source.pageSize
