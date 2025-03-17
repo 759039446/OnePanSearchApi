@@ -13,7 +13,7 @@ from utils.pan_type_util import get_pan_type
 
 def parse_links(data: str):
     lines = data.split('\n')
-    pattern = re.compile(r'链接：(https?://\S+)(?:\s+提取码：(\S+))?')
+    pattern = re.compile(r'链接[ :：]\s*(https?://\S+)(?:\s+提取码[ :：](\S+))?', re.IGNORECASE)
     results = []
     for line in lines:
         match = pattern.search(line.strip())
