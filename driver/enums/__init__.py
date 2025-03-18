@@ -2,6 +2,7 @@ from enum import Enum
 import asyncio
 from typing import List
 
+from driver.funpan import FunPan
 from driver.kkkob import KKKOB
 from utils.collection_util import sort_results_by_key
 from utils.dict_formatter_util import format_dict
@@ -25,8 +26,8 @@ class AsyncEnum(Enum):
         4, KKKOB.search, "kk小宇",
         {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'http://p.kkkob.com/', 'path': '/v/api/getXiaoyu'})
 
-    # ITEM_E = (
-    #     5, KKKOB.search, "kk小宇",{'keyword':'{keyword}','token': '{token}', 'endpoint': 'http://p.kkkob.com/', 'path': '/v/api/getSearchX'})
+    ITEM_E = (
+        5, FunPan.search, "趣盘搜",{'keyword':'{keyword}', 'endpoint': 'https://v.funletu.com', 'path': '/search'})
 
     def __init__(self, num, function, remark, args: dict):
         self.num = num
@@ -70,7 +71,7 @@ if __name__ == '__main__':
     async def main():
         keyword = "重生"
         results = await asyncio.gather(*(AsyncEnum.async_handler(x, keyword=keyword, page='1') for x in AsyncEnum))
-        results = sort_results_by_key(results, "from_site", ["KK大厅", "kk短剧", "kk橘子资源", "kk小宇"])
+        results = sort_results_by_key(results, "from_site", ["KK大厅", "kk短剧", "kk橘子资源", "kk小宇","趣盘搜"])
         merged_results = [item for sublist in results for item in sublist]
 
         print(merged_results)

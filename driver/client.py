@@ -13,7 +13,7 @@ async def search(keyword: str, from_site: list) -> list[SearchResult]:
     results = await asyncio.gather(*(AsyncEnum.async_handler(x, keyword=keyword) for x in enable_enums))
     results = sort_results_by_key(results, "fromSite",
                                   [AsyncEnum.ITEM_A.remark, AsyncEnum.ITEM_B.remark,
-                                   AsyncEnum.ITEM_C.remark, AsyncEnum.ITEM_D.remark])
+                                   AsyncEnum.ITEM_C.remark, AsyncEnum.ITEM_D.remark,AsyncEnum.ITEM_E.remark])
     merged_results = [item for sublist in results for item in sublist]
     return merged_results
 
