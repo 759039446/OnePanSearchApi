@@ -94,7 +94,7 @@ async def forward_request(request: Request):
 
     async with httpx.AsyncClient() as client:
         # 增加默认超时时间
-        response = await client.get(url, params=params, timeout=20.0)
+        response = await client.get(url, params=params)
         response_data = {'content': response.json(), 'status_code': response.status_code}
         # 将响应结果存入缓存
         get_cover_cache()[cache_key] = response_data

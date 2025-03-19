@@ -11,4 +11,4 @@ class SearchResult:
     fromSite: str
 
     def __getitem__(self, field_name: str) -> any:
-        return getattr(self, field_name)
+        return getattr(self, field_name, '')

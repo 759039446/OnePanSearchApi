@@ -13,7 +13,7 @@ http://127.0.0.1:21123/search/xxxx
 如：http://127.0.0.1:21123/search/庆余年2
 
 ### v2版本
-http://127.0.0.1:21123/search/庆余年2
+http://127.0.0.1:21123/search?keyword=%E8%AF%9B%E4%BB%99&type=%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98&from_site=KK%E5%A4%A7%E5%8E%85,kk%E7%9F%AD%E5%89%A7
 
 ### 搜索接口
 ```json
@@ -46,6 +46,9 @@ http://127.0.0.1:21123/search/庆余年2
 
 ## 目前支持：
 http://p.kkkob.com/
+https://pan.funletu.com/#/
+https://api.kuleu.com/api/bddj?text=短剧名称
+https://api.kuleu.com/api/action?text=短剧名称
 
 其他接口等更新
 

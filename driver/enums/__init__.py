@@ -2,7 +2,7 @@ from enum import Enum
 import asyncio
 from typing import List
 
-from driver.funpan import FunPan
+from driver.tempalte import Template, FUN_PAN, GET_API
 from driver.kkkob import KKKOB
 from utils.collection_util import sort_results_by_key
 from utils.dict_formatter_util import format_dict
@@ -27,7 +27,17 @@ class AsyncEnum(Enum):
         {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'http://p.kkkob.com/', 'path': '/v/api/getXiaoyu'})
 
     ITEM_E = (
-        5, FunPan.search, "趣盘搜",{'keyword':'{keyword}', 'endpoint': 'https://v.funletu.com', 'path': '/search'})
+        5, Template.search, "趣盘搜",
+        {'keyword': '{keyword}', 'endpoint': 'https://v.funletu.com', 'path': '/search', 'temp_name': FUN_PAN,
+         'id_field': 'id', 'title_field': 'title', 'url_field': 'url', 'pwd_field': 'extcode'})
+    ITEM_F = (
+        6, Template.search, "酷乐—百度",
+        {'keyword': '{keyword}', 'endpoint': 'https://api.kuleu.com/', 'path': '/api/bddj?text=', 'temp_name': GET_API,
+         'id_field': 'id', 'title_field': 'name', 'url_field': 'viewlink', 'pwd_field': 'extcode'})
+    ITEM_G = (
+        7, Template.search, "酷乐—夸克",
+        {'keyword': '{keyword}', 'endpoint': 'https://api.kuleu.com/', 'path': '/api/action?text=', 'temp_name': GET_API,
+         'id_field': 'id', 'title_field': 'name', 'url_field': 'viewlink', 'pwd_field': 'extcode'})
 
     def __init__(self, num, function, remark, args: dict):
         self.num = num
@@ -63,7 +73,7 @@ class AsyncEnum(Enum):
         args = getattr(enum_item, 'args').copy()
         args.update(**kwargs)
         args = format_dict(args, {'kk_token': token})
-        return await getattr(enum_item, 'function')(**args,from_site=getattr(enum_item, 'remark'))
+        return await getattr(enum_item, 'function')(**args, from_site=getattr(enum_item, 'remark'))
 
 
 if __name__ == '__main__':
@@ -71,7 +81,8 @@ if __name__ == '__main__':
     async def main():
         keyword = "重生"
         results = await asyncio.gather(*(AsyncEnum.async_handler(x, keyword=keyword, page='1') for x in AsyncEnum))
-        results = sort_results_by_key(results, "from_site", ["KK大厅", "kk短剧", "kk橘子资源", "kk小宇","趣盘搜"])
+        results = sort_results_by_key(results, "from_site", ["KK大厅", "kk短剧", "kk橘子资源", "kk小宇", "趣盘搜",
+                                                             "酷乐—百度","酷乐—夸克"])
         merged_results = [item for sublist in results for item in sublist]
 
         print(merged_results)
