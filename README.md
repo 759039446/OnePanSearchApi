@@ -97,9 +97,12 @@ http://127.0.0.1:21123/search?keyword=%E8%AF%9B%E4%BB%99&type=%E7%99%BE%E5%BA%A6
 ```
 
 ## 目前支持：
-http://p.kkkob.com/
-https://pan.funletu.com/#/
-https://api.kuleu.com/api/bddj?text=短剧名称
+http://p.kkkob.com/ \n
+
+https://pan.funletu.com/#/ \n
+
+https://api.kuleu.com/api/bddj?text=短剧名称 \n
+
 https://api.kuleu.com/api/action?text=短剧名称
 
 其他接口等更新
