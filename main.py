@@ -7,7 +7,7 @@ from starlette.responses import JSONResponse
 import httpx
 
 from driver.client import search
-from config.cache import get_cover_cache
+from config.cache import get_cover_cache, contain_cover_cache, set_cover_cache, get_shelve_quark_hot
 
 app = FastAPI(title="PanFileSearch API",
               description="网盘文件搜索服务",
@@ -88,18 +88,22 @@ async def forward_request(request: Request):
     cache_key = (url, tuple(sorted(params.items())))
 
     # 检查缓存中是否存在该请求的结果
-    if cache_key in get_cover_cache():
-        response_data = get_cover_cache()[cache_key]
+    if contain_cover_cache(cache_key):
+        response_data = get_cover_cache(cache_key)
         return JSONResponse(content=response_data['content'], status_code=response_data['status_code'])
-
-    async with httpx.AsyncClient() as client:
-        # 增加默认超时时间
-        response = await client.get(url, params=params)
-        response_data = {'content': response.json(), 'status_code': response.status_code}
-        # 将响应结果存入缓存
-        get_cover_cache()[cache_key] = response_data
+    try:
+        async with httpx.AsyncClient() as client:
+            # 增加默认超时时间
+            response = await client.get(url, params=params)
+            response_data = {'content': response.json(), 'status_code': response.status_code}
+            # 将响应结果存入缓存
+            set_cover_cache(cache_key,response_data)
+            return JSONResponse(content=response_data['content'], status_code=response_data['status_code'])
+    except Exception as e:
+        print(f"请求夸克热搜异常|| {e}")
+        # 如果请求失败，则从本地缓存中获取数据
+        response_data = get_shelve_quark_hot(cache_key)
         return JSONResponse(content=response_data['content'], status_code=response_data['status_code'])
-
 
 if __name__ == "__main__":
     import uvicorn

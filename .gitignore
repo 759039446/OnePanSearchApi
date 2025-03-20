@@ -2,3 +2,7 @@
 **.spec
 main.exe
 test
+**.bak
+**.dat
+**.dir
+
