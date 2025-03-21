@@ -1,3 +1,7 @@
 aiohttp == 3.9.5
 fastapi
+uvicorn
 httpx
+requests
+jsonpath-ng
+cachetools
