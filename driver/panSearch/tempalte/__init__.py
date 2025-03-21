@@ -1,8 +1,8 @@
 from urllib.parse import urljoin
 
-from driver.model.search_result import SearchResult
-from utils.http_template_util import send_aio_request_template
-from utils.pan_type_util import get_pan_type
+from driver.panSearch.model.search_result import SearchResult
+from driver.common.utils.http_template_util import send_aio_request_template
+from driver.common.utils.pan_type_util import get_pan_type
 
 FUN_PAN = "funPan"
 GET_API = "GET_API"

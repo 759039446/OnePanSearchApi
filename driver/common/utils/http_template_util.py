@@ -1,6 +1,6 @@
 import re
 
-from utils.http_util import send_request, aio_request
+from driver.common.utils.http_util import send_request, aio_request
 
 from jsonpath_ng import parse
 import json

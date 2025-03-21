@@ -3,9 +3,9 @@ from urllib.parse import urljoin
 
 import aiohttp
 
-from driver import error
-from driver.model.search_result import SearchResult
-from utils.pan_type_util import get_pan_type
+from driver.panSearch import error
+from driver.panSearch.model.search_result import SearchResult
+from driver.common.utils.pan_type_util import get_pan_type
 
 
 def parse_links(data: str):

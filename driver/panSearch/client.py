@@ -1,8 +1,8 @@
 import asyncio
 
-from driver.enums import AsyncEnum
-from driver.model.search_result import SearchResult
-from utils.collection_util import sort_results_by_key
+from driver.panSearch.enums import AsyncEnum
+from driver.panSearch.model.search_result import SearchResult
+from driver.common.utils.collection_util import sort_results_by_key
 
 
 async def search(keyword: str, from_site: list) -> list[SearchResult]:

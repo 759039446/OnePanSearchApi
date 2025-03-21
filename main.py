@@ -6,8 +6,8 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 import httpx
 
-from driver.client import search
-from config.cache import get_cover_cache, contain_cover_cache, set_cover_cache, get_shelve_quark_hot
+from driver.panSearch.client import search
+from driver.common.config.cache import get_cover_cache, contain_cover_cache, set_cover_cache, get_shelve_quark_hot
 
 app = FastAPI(title="PanFileSearch API",
               description="网盘文件搜索服务",
