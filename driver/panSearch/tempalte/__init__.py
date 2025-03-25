@@ -55,6 +55,7 @@ class Template:
                 url=item.get(url_field, ''),
                 type=get_pan_type(item.get(url_field, '')),
                 pwd=item.get(pwd_field, ''),
-                fromSite=keywords.get('from_site', '')
+                fromSite=keywords.get('from_site', ''),
+                code="0"
             ))
         return results

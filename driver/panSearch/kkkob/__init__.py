@@ -90,7 +90,8 @@ class KKKOB:
                     url=parsed_item.get('url', ''),
                     type=parsed_item.get('type', ''),
                     pwd=parsed_item.get('pwd', ''),
-                    fromSite=keywords.get('from_site', '')
+                    fromSite=keywords.get('from_site', ''),
+                    code="0"
                 ))
         return results
 

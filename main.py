@@ -57,11 +57,17 @@ async def search_pan(
 ):
     print(source)
     results = await search(source.keyword, source.fromSite)
-    filtered_results = [
-        res
-        for res in results
-        if (not source.type or res['type'] in source.type)
-    ]
+    # 自增计数器初始化
+    counter = 1
+    # 新建过滤列表
+    filtered_results = []
+    for res in results:
+        # 类型过滤条件保持不变
+        if not source.type or res.type in source.type:
+            # 添加自增code属性
+            res.code = str(counter)
+            filtered_results.append(res)
+            counter += 1
     total = len(filtered_results)
     start = (source.page - 1) * source.pageSize
     end = source.page * source.pageSize
