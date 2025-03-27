@@ -47,15 +47,19 @@ class Template:
         results = []
         if res is None or len(res) == 0:
             return results
-        for item in res[0]:
-            # 确保所有字段存在（使用dict.get处理缺失字段）
-            results.append(SearchResult(
-                id=item.get(id_field, ''),
-                name=item.get(title_field, '').replace('<em>','').replace('</em>', ''),
-                url=item.get(url_field, ''),
-                type=get_pan_type(item.get(url_field, '')),
-                pwd=item.get(pwd_field, ''),
-                fromSite=keywords.get('from_site', ''),
-                code="0"
-            ))
+        try:
+            for item in res[0]:
+                # 确保所有字段存在（使用dict.get处理缺失字段）
+                results.append(SearchResult(
+                    id=item.get(id_field, ''),
+                    name=item.get(title_field, '').replace('<em>','').replace('</em>', ''),
+                    url=item.get(url_field, ''),
+                    type=get_pan_type(item.get(url_field, '')),
+                    pwd=item.get(pwd_field, ''),
+                    fromSite=keywords.get('from_site', ''),
+                    code="0"
+                ))
+        except Exception as e:
+            print(f"解析模板结果失败||  请求模板：\n{template}\n错误信息：{e}")
+            return []
         return results
