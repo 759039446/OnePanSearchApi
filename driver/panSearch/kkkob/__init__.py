@@ -56,11 +56,15 @@ class KKKOB:
 
     @staticmethod
     async def getToken(endpoint: str):
-        res = await KKKOB._request(
-            endpoint, "GET", "/v/api/getToken",
-            headers={"Content-Type": "application/json"},
-        )
-        return res.get("token")
+        try:
+            res = await KKKOB._request(
+                endpoint, "GET", "/v/api/getToken",
+                headers={"Content-Type": "application/json"},
+            )
+            return res.get("token")
+        except Exception as e:
+            print(f"ERROR || 获取token失败 || {e}")
+            return ""
 
     @staticmethod
     async def search(keyword: str, token: str, endpoint: str, path: str, **keywords) -> list[SearchResult]:
