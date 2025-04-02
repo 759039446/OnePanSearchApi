@@ -30,7 +30,7 @@ def parse_links(data: str):
 
 class KKKOB:
     def __init__(self, ):
-        self.endpoint = 'http://p.kkkob.com/'
+        self.endpoint = 'https://s.kkkba.com/'
         self.token = ''
 
         self.search_paths = [

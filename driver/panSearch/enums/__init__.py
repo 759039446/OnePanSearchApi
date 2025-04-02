@@ -15,16 +15,16 @@ class AsyncEnum(Enum):
     """
     ITEM_A = (
         1, KKKOB.search, "kk大厅",
-        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'http://p.kkkob.com/', 'path': '/v/api/search'})
+        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://s.kkkba.com/', 'path': '/v/api/search'})
     ITEM_B = (
         2, KKKOB.search, "kk短剧",
-        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'http://p.kkkob.com/', 'path': '/v/api/getDJ'})
+        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://s.kkkba.com/', 'path': '/v/api/getDJ'})
     ITEM_C = (
         3, KKKOB.search, "kk橘子资源",
-        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'http://p.kkkob.com/', 'path': '/v/api/getJuzi'})
+        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://s.kkkba.com/', 'path': '/v/api/getJuzi'})
     ITEM_D = (
         4, KKKOB.search, "kk小宇",
-        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'http://p.kkkob.com/', 'path': '/v/api/getXiaoyu'})
+        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://s.kkkba.com/', 'path': '/v/api/getXiaoyu'})
 
     ITEM_E = (
         5, Template.search, "趣盘搜",
@@ -68,7 +68,7 @@ class AsyncEnum(Enum):
             enum_item: 必须传入本枚举成员
             **kwargs: 动态关键字参数
         """
-        token = await KKKOB.getToken("http://p.kkkob.com/")
+        token = await KKKOB.getToken("https://s.kkkba.com/")
         # 合并默认参数和动态参数
         args = getattr(enum_item, 'args').copy()
         args.update(**kwargs)
