@@ -13,29 +13,46 @@ class AsyncEnum(Enum):
     - 功能: 支持动态参数的异步处理模板
     - 版本: v1.2
     """
-    ITEM_A = (
+    ITEM_A_1 = (
         1, KKKOB.search, "kk大厅",
-        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://s.kkkba.com/', 'path': '/v/api/search'})
+        {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/', 'path': '/api/sortWeb',
+         'userid': '191201nf'})
+    ITEM_A_2 = (
+        2, KKKOB.search, "kk大厅",
+        {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/',
+         'path': '/api/sortWeb',
+         'userid': '201211nf'})
+    ITEM_A_3 = (
+        3, KKKOB.search, "kk大厅",
+        {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/',
+         'path': '/api/sortWeb',
+         'userid': '201212nf'})
+    ITEM_KK_1 = (
+        10, KKKOB.search, "kk短剧",
+        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://m.kkkba.com/','path': '/v/api/getDJ'})
+    ITEM_KK_2 = (
+        11, KKKOB.search, "kk橘子资源",
+        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://m.kkkba.com/','path': '/v/api/getJuzi'})
+    ITEM_KK_3 = (
+        11, KKKOB.search, "kk小宇",
+        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://m.kkkba.com/','path': '/v/api/getXiaoyu'})
     ITEM_B = (
-        2, KKKOB.search, "kk短剧",
-        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://s.kkkba.com/', 'path': '/v/api/getDJ'})
-    ITEM_C = (
-        3, KKKOB.search, "kk橘子资源",
-        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://s.kkkba.com/', 'path': '/v/api/getJuzi'})
+        40, KKKOB.search, "kk小悠",
+        {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/', 'path': '/api/getXiaoy'})
     ITEM_D = (
-        4, KKKOB.search, "kk小宇",
-        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://s.kkkba.com/', 'path': '/v/api/getXiaoyu'})
+        60, KKKOB.search, "kk天天追剧",
+        {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/', 'path': '/api/getTTZJB'})
 
     ITEM_E = (
-        5, Template.search, "趣盘搜",
+        70, Template.search, "趣盘搜",
         {'keyword': '{keyword}', 'endpoint': 'https://v.funletu.com', 'path': '/search', 'temp_name': FUN_PAN,
          'id_field': 'id', 'title_field': 'title', 'url_field': 'url', 'pwd_field': 'extcode'})
     ITEM_F = (
-        6, Template.search, "酷乐—百度",
+        80, Template.search, "酷乐—百度",
         {'keyword': '{keyword}', 'endpoint': 'https://api.kuleu.com/', 'path': '/api/bddj?text=', 'temp_name': GET_API,
          'id_field': 'id', 'title_field': 'name', 'url_field': 'viewlink', 'pwd_field': 'extcode'})
     ITEM_G = (
-        7, Template.search, "酷乐—夸克",
+        90, Template.search, "酷乐—夸克",
         {'keyword': '{keyword}', 'endpoint': 'https://api.kuleu.com/', 'path': '/api/action?text=', 'temp_name': GET_API,
          'id_field': 'id', 'title_field': 'name', 'url_field': 'viewlink', 'pwd_field': 'extcode'})
 
@@ -57,10 +74,20 @@ class AsyncEnum(Enum):
         if not remarks:
             return []
 
-        # 构建 remark到枚举的映射
-        remark_map = {member.remark: member for member in cls}
-        return [remark_map[remark] for remark in remarks if remark in remark_map]
+        # 构建 remark到枚举列表的映射
+        remark_map = {}
+        for member in cls:
+            if member.remark not in remark_map:
+                remark_map[member.remark] = []
+            remark_map[member.remark].append(member)
 
+        # 收集所有匹配的枚举成员
+        result = []
+        for remark in remarks:
+            if remark in remark_map:
+                result.extend(remark_map[remark])
+
+        return result
     @staticmethod
     async def async_handler(enum_item: Enum, **kwargs):
         """异步核心方法（方法级备注）
@@ -68,11 +95,12 @@ class AsyncEnum(Enum):
             enum_item: 必须传入本枚举成员
             **kwargs: 动态关键字参数
         """
-        token = await KKKOB.getToken("https://s.kkkba.com/")
+        gg_token = await KKKOB.getToken("http://gg.ksfuwu.com:8091/",'/api/gettoken')
+        kk_token = await KKKOB.getToken("https://m.kkkba.com/", '/v/api/getToken')
         # 合并默认参数和动态参数
         args = getattr(enum_item, 'args').copy()
         args.update(**kwargs)
-        args = format_dict(args, {'kk_token': token})
+        args = format_dict(args, {'gg_token': gg_token,'kk_token':kk_token})
         return await getattr(enum_item, 'function')(**args, from_site=getattr(enum_item, 'remark'))
 
 
@@ -81,8 +109,7 @@ if __name__ == '__main__':
     async def main():
         keyword = "重生"
         results = await asyncio.gather(*(AsyncEnum.async_handler(x, keyword=keyword, page='1') for x in AsyncEnum))
-        results = sort_results_by_key(results, "from_site", ["KK大厅", "kk短剧", "kk橘子资源", "kk小宇", "趣盘搜",
-                                                             "酷乐—百度","酷乐—夸克"])
+        results = sort_results_by_key(results, "from_site", [member.remark for member in sorted(AsyncEnum, key=lambda x: x.num)])
         merged_results = [item for sublist in results for item in sublist]
 
         print(merged_results)

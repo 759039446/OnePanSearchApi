@@ -29,17 +29,6 @@ def parse_links(data: str):
 
 
 class KKKOB:
-    def __init__(self, ):
-        self.endpoint = 'https://s.kkkba.com/'
-        self.token = ''
-
-        self.search_paths = [
-            "/v/api/search",
-            "/v/api/getDJ",
-            "/v/api/getJuzi",
-            "/v/api/getXiaoyu",
-            "/v/api/getSearchX"
-        ]
 
     @staticmethod
     def _isBadRequest(self, r, msg, key="code", value=200, message_key="message"):
@@ -55,10 +44,10 @@ class KKKOB:
                 return await response.json()
 
     @staticmethod
-    async def getToken(endpoint: str):
+    async def getToken(endpoint: str, path: str):
         try:
             res = await KKKOB._request(
-                endpoint, "GET", "/v/api/getToken",
+                endpoint, "GET", path,
                 headers={"Content-Type": "application/json"},
             )
             return res.get("token")
@@ -71,6 +60,11 @@ class KKKOB:
         payload = {
             "name": keyword,
             "token": token,
+            'tabN': f'movie_{keywords.get('userid')}',
+            'topNo': 10,
+            'whr': f'question like "%{keyword}%"',
+            'orderType': 'DESC',
+            'keys': 'question,answer,isTop,id'
         }
         try:
             res = await KKKOB._request(
@@ -79,24 +73,27 @@ class KKKOB:
                 data=payload
             )
         except Exception as e:
-            # traceback.print_exc()
+            print(e)
             return []
         # 转换原始数据到实体模型
         raw_list = res.get('list', [])
         results = []
-        for item in raw_list:
-            parsed = parse_links(item.get('answer'))
-            for parsed_item in parsed:
-                # 确保所有字段存在（使用dict.get处理缺失字段）
-                results.append(SearchResult(
-                    id=item.get('id', ''),
-                    name=item.get('question', ''),
-                    url=parsed_item.get('url', ''),
-                    type=parsed_item.get('type', ''),
-                    pwd=parsed_item.get('pwd', ''),
-                    fromSite=keywords.get('from_site', ''),
-                    code="0"
-                ))
+        try:
+            for item in raw_list:
+                parsed = parse_links(item.get('answer'))
+                for parsed_item in parsed:
+                    # 确保所有字段存在（使用dict.get处理缺失字段）
+                    results.append(SearchResult(
+                        id=item.get('id', ''),
+                        name=item.get('question', ''),
+                        url=parsed_item.get('url', ''),
+                        type=parsed_item.get('type', ''),
+                        pwd=parsed_item.get('pwd', ''),
+                        fromSite=keywords.get('from_site', ''),
+                        code="0"
+                    ))
+        except Exception as e:
+            print(e)
         return results
 
 
