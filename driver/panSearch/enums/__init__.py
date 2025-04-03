@@ -14,8 +14,8 @@ class AsyncEnum(Enum):
     - 功能: 支持动态参数的异步处理模板
     - 版本: v1.2
     """
-    ITEM_PANSEARCH = (
-        1, PanSearch.search, "PanSearch",
+    ITEM_PAN_SEARCH = (
+        0, PanSearch.search, "PanSearch",
         {'keyword': '{keyword}', 'endpoint': 'https://www.pansearch.me/','path': '/search'})
     ITEM_A_1 = (
         1, KKKOB.search, "kk大厅",
