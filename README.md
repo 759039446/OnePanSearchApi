@@ -2,15 +2,11 @@
 
 网盘聚合搜索，基于FastAPI和aiohttp 对接各种网盘资源搜索接口，通过一个接口请求聚合搜索网盘资源
 
+
+
 ## 使用方法
 启动`main.py`
 
-### v1版本
-
-打开网址：
-http://127.0.0.1:21123/search/xxxx
-
-如：http://127.0.0.1:21123/search/庆余年2
 
 ### v2版本
 http://127.0.0.1:21123/search?keyword=诛仙&type=夸克网盘&fromSite=kk大厅&page=1&pageSize=10
@@ -109,11 +105,14 @@ http://127.0.0.1:21123/search?keyword=诛仙&type=夸克网盘&fromSite=kk大厅
 	"code": 200
 }
 ```
+## 接口用时
+![接口用时](/docs/微信图片_20250403153222.png)
 
 ## 目前支持：
 https://pan.funletu.com
 
 https://api.kuleu.com
+更多的就看源码了
 
 
 其他接口等更新
