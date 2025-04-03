@@ -76,7 +76,7 @@ async def send_aio_request_template(template_config: dict, **kwargs):
         result = await aio_request(conf.get('method'),
                                    conf.get('url'),
                                    headers=conf.get('headers'),
-                                   data=conf.get('body'),ssl=False)
+                                   data=conf.get('body'), ssl=False)
     except Exception as e:
         print(f"发送模板请求失败||  请求模板：\n{conf}\n错误信息：{e}")
         return None

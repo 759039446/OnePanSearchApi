@@ -5,7 +5,6 @@ import aiohttp
 import requests
 
 
-
 def send_post_request(url, body, headers=None, timeout=10, params=None):
     """
     发送一个 POST 请求到指定的 URL，请求体为字典。
@@ -94,4 +93,3 @@ def send_request(method: str, url: str, **kwargs) -> str:
     looper = asyncio.new_event_loop()
     looper.run_until_complete(func())
     return aio_data[0]
-

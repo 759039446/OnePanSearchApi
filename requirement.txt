@@ -5,3 +5,5 @@ httpx
 requests
 jsonpath-ng
 cachetools
+beautifulsoup4
+lxml

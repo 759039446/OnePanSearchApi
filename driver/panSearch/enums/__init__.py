@@ -2,6 +2,7 @@ from enum import Enum
 import asyncio
 from typing import List
 
+from driver.panSearch.pansearch import PanSearch
 from driver.panSearch.tempalte import Template, FUN_PAN, GET_API
 from driver.panSearch.kkkob import KKKOB
 from driver.common.utils.collection_util import sort_results_by_key
@@ -13,6 +14,9 @@ class AsyncEnum(Enum):
     - 功能: 支持动态参数的异步处理模板
     - 版本: v1.2
     """
+    ITEM_PANSEARCH = (
+        1, PanSearch.search, "PanSearch",
+        {'keyword': '{keyword}', 'endpoint': 'https://www.pansearch.me/','path': '/search'})
     ITEM_A_1 = (
         1, KKKOB.search, "kk大厅",
         {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/', 'path': '/api/sortWeb',
