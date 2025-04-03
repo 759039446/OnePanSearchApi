@@ -1,10 +1,9 @@
-import random
+import asyncio
+import re
 import traceback
 from urllib.parse import urljoin
 
 import aiohttp
-import asyncio
-import re
 from bs4 import BeautifulSoup
 
 from driver.common.utils.pan_type_util import get_pan_type
