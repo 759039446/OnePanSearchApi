@@ -13,6 +13,8 @@ def parse_links(data: str):
     pattern = re.compile(r'链接[ :：]\s*(https?://\S+)(?:\s+提取码[ :：](\S+))?', re.IGNORECASE)
     results = []
     for line in lines:
+        if "http" not in line:
+            continue
         match = pattern.search(line.strip())
         if match:
             link = match.group(1)

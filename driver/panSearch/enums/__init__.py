@@ -31,21 +31,29 @@ class AsyncEnum(Enum):
         {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/',
          'path': '/api/sortWeb',
          'userid': '201212nf'})
+    ITEM_A_4 = (
+        4, KKKOB.search, "kk大厅",
+        {'keyword': '{keyword}', 'token': '{xc_token}', 'endpoint': 'http://xccji.top/',
+         'path': '/v/api/sortWeb',
+         'userid': '200317xlb'})
     ITEM_KK_1 = (
         10, KKKOB.search, "kk短剧",
-        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://m.kkkba.com/','path': '/v/api/getDJ'})
+        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://m.kkkba.com/', 'path': '/v/api/getDJ'})
     ITEM_KK_2 = (
         11, KKKOB.search, "kk橘子资源",
-        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://m.kkkba.com/','path': '/v/api/getJuzi'})
+        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://m.kkkba.com/', 'path': '/v/api/getJuzi'})
     ITEM_KK_3 = (
         11, KKKOB.search, "kk小宇",
-        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://m.kkkba.com/','path': '/v/api/getXiaoyu'})
+        {'keyword': '{keyword}', 'token': '{kk_token}', 'endpoint': 'https://m.kkkba.com/', 'path': '/v/api/getXiaoyu'})
     ITEM_B = (
         40, KKKOB.search, "kk小悠",
         {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/', 'path': '/api/getXiaoy'})
     ITEM_D = (
         60, KKKOB.search, "kk天天追剧",
         {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/', 'path': '/api/getTTZJB'})
+    ITEM_DYFX = (
+        61, KKKOB.search, "kk短剧2",
+        {'keyword': '{keyword}', 'token': '{xc_token}', 'endpoint': 'http://xccji.top/', 'path': '/v/api/getDyfx'})
 
     ITEM_E = (
         70, Template.search, "趣盘搜",
@@ -99,12 +107,14 @@ class AsyncEnum(Enum):
             enum_item: 必须传入本枚举成员
             **kwargs: 动态关键字参数
         """
-        gg_token = await KKKOB.getToken("http://gg.ksfuwu.com:8091/",'/api/gettoken')
-        kk_token = await KKKOB.getToken("https://m.kkkba.com/", '/v/api/getToken')
+
         # 合并默认参数和动态参数
         args = getattr(enum_item, 'args').copy()
         args.update(**kwargs)
-        args = format_dict(args, {'gg_token': gg_token,'kk_token':kk_token})
+        args = format_dict(args, {
+                                    'gg_token': kwargs.get('gg_token'),
+                                    'kk_token': kwargs.get('kk_token'),
+                                    'xc_token': kwargs.get('xc_token')})
         return await getattr(enum_item, 'function')(**args, from_site=getattr(enum_item, 'remark'))
 
 
