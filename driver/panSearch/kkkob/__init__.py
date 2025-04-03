@@ -51,6 +51,7 @@ class KKKOB:
             res = await KKKOB._request(
                 endpoint, "GET", path,
                 headers={"Content-Type": "application/json"},
+                ssl=False
             )
             return res.get("token")
         except Exception as e:
@@ -72,7 +73,8 @@ class KKKOB:
             res = await KKKOB._request(
                 endpoint, "POST", path,
                 headers={"Content-Type": "application/x-www-form-urlencoded"},
-                data=payload
+                data=payload,
+                ssl=False
             )
         except Exception as e:
             print(e)
