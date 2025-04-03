@@ -13,7 +13,21 @@ http://127.0.0.1:21123/search/xxxx
 如：http://127.0.0.1:21123/search/庆余年2
 
 ### v2版本
-http://127.0.0.1:21123/search?keyword=%E8%AF%9B%E4%BB%99&type=%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98&from_site=KK%E5%A4%A7%E5%8E%85,kk%E7%9F%AD%E5%89%A7
+http://127.0.0.1:21123/search?keyword=诛仙&type=夸克网盘&fromSite=kk大厅&page=1&pageSize=10
+
+**请求方式**
+
+> GET
+
+**请求Query参数**
+
+| 参数名 | 示例值 | 参数类型 | 是否必填 | 参数描述                                                                     |
+| --- | --- | ---- | ---- |--------------------------------------------------------------------------|
+| keyword | 诛仙 | String | 是 | -                                                                        |
+| type | 夸克网盘 | String | 是 | -                                                                        |
+| fromSite | kk大厅 | String | 是 | 不传则搜全部 可选项：kk大厅、kk短剧、kk橘子资源、kk小宇、kk小悠、kk天天追剧<br/>【速度自行判断】趣盘搜、酷乐—百度、酷乐—夸克 |
+| page | 1 | String | 是 | -                                                                        |
+| pageSize | 10 | String | 是 | -                                                                        |
 
 ### 搜索接口
 ```json
@@ -97,13 +111,9 @@ http://127.0.0.1:21123/search?keyword=%E8%AF%9B%E4%BB%99&type=%E7%99%BE%E5%BA%A6
 ```
 
 ## 目前支持：
-http://p.kkkob.com/
+https://pan.funletu.com
+https://api.kuleu.com
 
-https://pan.funletu.com/#/
-
-https://api.kuleu.com/api/bddj?text=短剧名称 
-
-https://api.kuleu.com/api/action?text=短剧名称
 
 其他接口等更新
 
@@ -124,10 +134,17 @@ pip install -r requirement.txt
 pip install nuitka 
 python -m nuitka --standalone --onefile  --remove-output main.py
 ```
+## 已知问题
+1. 因为kkkob站点关掉了，暂时更换成差不多的站点，速度较慢没有以前快，质量也没有很高，有对接需求的可以提issue
+2. kk大厅为类似站点的用户资源，资源参差不齐，自行决定排序内容
+3. kk大厅的链接、提取码 正则可能会匹配不到，需要修改正则匹配规则，如果有匹配不到的可以提issue
+
 ## 更新计划
 1. 添加更多接口
 2. 检测是否失效
 3. 性能优化、代码优化
 
 # 交流群
-
+[【派派圈短剧】qq群： 956740061](https://qm.qq.com/q/9yOkycLpIs) 
+<br><br>
+禁止广告
