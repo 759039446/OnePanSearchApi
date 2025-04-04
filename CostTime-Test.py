@@ -27,7 +27,7 @@ async def timed_execution(task, note):
         result = "接口出错"
     finally:
         elapsed = time.time() - start_time
-        print(f"{Colors.RED}DEBUG || Task for {note} took {elapsed:.2f}s , result {result}", Colors.RESET)
+        print(f"{Colors.RED}DEBUG || Task for {note} took {elapsed:.2f}s , result {result}\n", Colors.RESET)
         return result
 
 
