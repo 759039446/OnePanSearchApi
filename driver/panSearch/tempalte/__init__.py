@@ -6,7 +6,8 @@ from driver.common.utils.pan_type_util import get_pan_type
 
 FUN_PAN = "funPan"
 GET_API = "GET_API"
-
+GET_API_2 = "GET_API_2"
+GET_API_3 = "GET_API_2"
 templates={
     FUN_PAN:{
             "name": "",
@@ -27,7 +28,27 @@ templates={
             "Content-Type": "application/json"
         },
         "body": ""
-    }
+    },
+    GET_API_2: {
+        "name": "",
+        "response_json_path": "",
+        "method": "GET",
+        "url": "{{url}}{{keyword}}",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": ""
+    },
+    GET_API_3:{
+        "name": "",
+        "response_json_path": "data[0]",
+        "method": "GET",
+        "url": "{{url}}{{keyword}}",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": ""
+    },
 }
 
 
@@ -35,7 +56,7 @@ class Template:
     @staticmethod
     async def search(keyword: str, endpoint: str, path: str, temp_name: str, id_field:str,title_field:str,url_field:str, pwd_field:str, **keywords) -> list[SearchResult]:
         url = urljoin(endpoint, path)
-        template = templates.get(temp_name, None)
+        template = templates.get(temp_name, {})
         if template is None:
             print(f"模板不存在：{temp_name}")
             return []
@@ -48,7 +69,9 @@ class Template:
         if res is None or len(res) == 0:
             return results
         try:
-            for item in res[0]:
+            if len(template.get("response_json_path")) != 0:
+                res = res[0]
+            for item in res:
                 # 确保所有字段存在（使用dict.get处理缺失字段）
                 results.append(SearchResult(
                     id=item.get(id_field, ''),

@@ -3,7 +3,7 @@ import asyncio
 from typing import List
 
 from driver.panSearch.pansearch import PanSearch
-from driver.panSearch.tempalte import Template, FUN_PAN, GET_API
+from driver.panSearch.tempalte import Template, FUN_PAN, GET_API, GET_API_2, GET_API_3
 from driver.panSearch.kkkob import KKKOB
 from driver.common.utils.collection_util import sort_results_by_key
 from driver.common.utils.dict_formatter_util import format_dict
@@ -18,21 +18,21 @@ class AsyncEnum(Enum):
         0, PanSearch.search, "PanSearch",
         {'keyword': '{keyword}', 'endpoint': 'https://www.pansearch.me/','path': '/search'})
     ITEM_A_1 = (
-        1, KKKOB.search, "kk大厅",
+        9999, KKKOB.search, "kk大厅",
         {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/', 'path': '/api/sortWeb',
          'userid': '191201nf'})
     ITEM_A_2 = (
-        2, KKKOB.search, "kk大厅",
+        9998, KKKOB.search, "kk大厅",
         {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/',
          'path': '/api/sortWeb',
          'userid': '201211nf'})
     ITEM_A_3 = (
-        3, KKKOB.search, "kk大厅",
+        9997, KKKOB.search, "kk大厅",
         {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/',
          'path': '/api/sortWeb',
          'userid': '201212nf'})
     ITEM_A_4 = (
-        4, KKKOB.search, "kk大厅",
+        9996, KKKOB.search, "kk大厅",
         {'keyword': '{keyword}', 'token': '{xc_token}', 'endpoint': 'http://xccji.top/',
          'path': '/v/api/sortWeb',
          'userid': '200317xlb'})
@@ -60,13 +60,54 @@ class AsyncEnum(Enum):
         {'keyword': '{keyword}', 'endpoint': 'https://v.funletu.com', 'path': '/search', 'temp_name': FUN_PAN,
          'id_field': 'id', 'title_field': 'title', 'url_field': 'url', 'pwd_field': 'extcode'})
     ITEM_F = (
-        80, Template.search, "酷乐—百度",
+        800, Template.search, "酷乐—百度",
         {'keyword': '{keyword}', 'endpoint': 'https://api.kuleu.com/', 'path': '/api/bddj?text=', 'temp_name': GET_API,
          'id_field': 'id', 'title_field': 'name', 'url_field': 'viewlink', 'pwd_field': 'extcode'})
     ITEM_G = (
-        90, Template.search, "酷乐—夸克",
+        900, Template.search, "酷乐—夸克",
         {'keyword': '{keyword}', 'endpoint': 'https://api.kuleu.com/', 'path': '/api/action?text=', 'temp_name': GET_API,
          'id_field': 'id', 'title_field': 'name', 'url_field': 'viewlink', 'pwd_field': 'extcode'})
+
+    ITEM_AI_KAN = (
+        1010, Template.search, "爱看短剧",
+        {'keyword': '{keyword}', 'endpoint': 'https://ys.110t.cn/', 'path': '/api/ajax.php?act=search&name=',
+         'temp_name': GET_API,
+         'id_field': 'id', 'title_field': 'name', 'url_field': 'url', 'pwd_field': 'extcode'})
+    ITEM_ycubbs = (
+        1020, Template.search, "ycubbs",
+        {'keyword': '{keyword}', 'endpoint': 'https://ai-img.ycubbs.cn/', 'path': '/api/duanju/search?name=',
+         'temp_name': GET_API,
+         'id_field': 'id', 'title_field': 'name', 'url_field': 'url', 'pwd_field': 'extcode'})
+    ITEM_MENGQIANYU = (
+        1030, Template.search, "梦牵云",
+        {'keyword': '{keyword}', 'endpoint': 'https://api.qsdurl.cn/', 'path': '/tool/duanju/?name=',
+         'temp_name': GET_API_2,
+         'id_field': 'id', 'title_field': 'name', 'url_field': 'url', 'pwd_field': 'extcode'})
+    ITEM_LONGZHU_DJ = (
+        1040, Template.search, "龙珠-短剧",
+        {'keyword': '{keyword}', 'endpoint': 'https://api.dragonlongzhu.cn/', 'path': '/api/duanju_cat.php?name=',
+         'temp_name': GET_API,
+         'id_field': 'id', 'title_field': 'title', 'url_field': 'url', 'pwd_field': 'extcode'})
+    # ITEM_LONGZHU_YS = (
+    #     1040, Template.search, "龙珠-影视",
+    #     {'keyword': '{keyword}', 'endpoint': 'https://api.dragonlongzhu.cn/', 'path': '/api/ziyuan_nanfeng.php?keysearch=',
+    #      'temp_name': GET_API,
+    #      'id_field': 'id', 'title_field': 'title', 'url_field': 'data_url', 'pwd_field': 'extcode'})
+    ITEM_6789o_1 = (
+        1050, Template.search, "6789o",
+        {'keyword': '{keyword}', 'endpoint': 'https://zy.6789o.com/', 'path': '/duanjuapi/search.php?text=',
+         'temp_name': GET_API,
+         'id_field': 'id', 'title_field': 'name', 'url_field': 'viewlink', 'pwd_field': 'extcode'})
+    ITEM_6789o_2 = (
+        1051, Template.search, "6789o",
+        {'keyword': '{keyword}', 'endpoint': 'https://www.6789o.com/', 'path': '/api/duanju_apihj.php?name=',
+         'temp_name': GET_API,
+         'id_field': 'id', 'title_field': 'name', 'url_field': 'url', 'pwd_field': 'extcode'})
+    ITEM_6789o_3 = (
+        1052, Template.search, "6789o",
+        {'keyword': '{keyword}', 'endpoint': 'https://www.6789o.com/', 'path': '/api/baiduziyuan_apiheji.php?name=',
+         'temp_name': GET_API_3,
+         'id_field': 'id', 'title_field': 'name', 'url_field': 'url', 'pwd_field': 'extcode'})
 
     def __init__(self, num, function, remark, args: dict):
         self.num = num
