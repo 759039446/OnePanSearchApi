@@ -5,7 +5,8 @@ DISK_TYPE_MAPPING = {
     "pan.baidu.com": "百度网盘",
     "pan.quark.cn": "夸克网盘",
     "pan.xunlei.com": "迅雷网盘",
-    "www.alipan.com": "阿里网盘"
+    "www.alipan.com": "阿里网盘",
+    'drive.uc.cn': 'UC网盘'
 }
 
 
