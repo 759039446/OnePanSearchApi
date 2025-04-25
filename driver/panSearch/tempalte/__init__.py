@@ -72,6 +72,8 @@ class Template:
             if len(template.get("response_json_path")) != 0:
                 res = res[0]
             for item in res:
+                if isinstance(item, list) and len(item) > 0:
+                    item = item[0]
                 # 确保所有字段存在（使用dict.get处理缺失字段）
                 results.append(SearchResult(
                     id=item.get(id_field, ''),
@@ -83,6 +85,6 @@ class Template:
                     code="0"
                 ))
         except Exception as e:
-            print(f"解析模板结果失败||  请求模板：\n{template}\n错误信息：{e}")
+            print(f"解析模板结果失败||  请求模板：{keywords.get('from_site', '')}\n{template}\n错误信息：{e}")
             return []
         return results

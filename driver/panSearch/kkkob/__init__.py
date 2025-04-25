@@ -3,29 +3,20 @@ from urllib.parse import urljoin
 
 import aiohttp
 
+from driver.common.utils.link_util import extract_info_entity2
 from driver.panSearch import error
 from driver.panSearch.model.search_result import SearchResult
 from driver.common.utils.pan_type_util import get_pan_type
 
 
 def parse_links(data: str):
-    lines = data.split('\n')
-    pattern = re.compile(r'链接[ :：]\s*(https?://\S+)(?:\s+提取码[ :：](\S+))?', re.IGNORECASE)
+    list = extract_info_entity2(data)
     results = []
-    for line in lines:
-        if "http" not in line:
-            continue
-        match = pattern.search(line.strip())
-        if match:
-            link = match.group(1)
-            pwd = match.group(2) or ''
-        else:
-            link = line.strip()
-            pwd = ''
+    for link_info in list:
         results.append({
-            "url": link,
-            "pwd": pwd,
-            'type': get_pan_type(link)
+            "url": link_info['url'],
+            "pwd": link_info['pwd'],
+            'type': get_pan_type(link_info['url'])
         })
     return results
 

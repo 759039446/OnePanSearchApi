@@ -11,7 +11,7 @@ from driver.common.config.cache import get_cover_cache, contain_cover_cache, set
 
 app = FastAPI(title="PanFileSearch API",
               description="网盘文件搜索服务",
-              version="2.0.0")
+              version="2.0.1")
 
 # 添加 CORS 配置
 app.add_middleware(
