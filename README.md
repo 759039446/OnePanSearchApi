@@ -109,10 +109,8 @@ http://127.0.0.1:21123/search?keyword=诛仙&type=夸克网盘&fromSite=kk大厅
 ![接口用时](/docs/微信图片_20250403153222.png)
 
 ## 目前支持：
-https://pan.funletu.com
 
-https://api.kuleu.com
-更多的就看源码了
+看源码,啥也不知道
 
 
 其他接口等更新
