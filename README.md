@@ -2,10 +2,12 @@
 
 网盘聚合搜索，基于FastAPI和aiohttp 对接各种网盘资源搜索接口，通过一个接口请求聚合搜索网盘资源
 
-
+# 演示站点 api.ppqa.cn
+http://api.ppqa.cn/apidata?id=581
 
 ## 使用方法
 启动`main.py`
+
 
 
 ### v2版本
