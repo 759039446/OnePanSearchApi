@@ -56,7 +56,7 @@ class AsyncEnum(Enum):
         {'keyword': '{keyword}', 'token': '{xc_token}', 'endpoint': 'http://xccji.top/', 'path': '/v/api/getDyfx'})
 
     ITEM_E = (
-        70, Template.search, "趣盘搜",
+        99999, Template.search, "趣盘搜",
         {'keyword': '{keyword}', 'endpoint': 'https://v.funletu.com', 'path': '/search', 'temp_name': FUN_PAN,
          'id_field': 'id', 'title_field': 'title', 'url_field': 'url', 'pwd_field': 'extcode'})
     ITEM_F = (
