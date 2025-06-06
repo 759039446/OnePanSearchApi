@@ -68,6 +68,8 @@ async def search_pan(
             res.code = str(counter)
             filtered_results.append(res)
             counter += 1
+            if len(res.name) == 0:
+                res.name = source.keyword
     total = len(filtered_results)
     start = (source.page - 1) * source.pageSize
     end = source.page * source.pageSize
