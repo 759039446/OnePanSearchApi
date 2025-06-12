@@ -3,7 +3,7 @@ import asyncio
 from typing import List
 
 from driver.panSearch.pansearch import PanSearch
-from driver.panSearch.tempalte import Template, FUN_PAN, GET_API, GET_API_2, GET_API_3
+from driver.panSearch.tempalte import Template, FUN_PAN, GET_API, GET_API_2, GET_API_3, GET_API_4
 from driver.panSearch.kkkob import KKKOB
 from driver.common.utils.collection_util import sort_results_by_key
 from driver.common.utils.dict_formatter_util import format_dict
@@ -108,7 +108,11 @@ class AsyncEnum(Enum):
         {'keyword': '{keyword}', 'endpoint': 'https://www.6789o.com/', 'path': '/api/baiduziyuan_apiheji.php?name=',
          'temp_name': GET_API_3,
          'id_field': 'id', 'title_field': 'name', 'url_field': 'url', 'pwd_field': 'extcode'})
-
+    ITEM_HABAO = (
+        9999, Template.search, "哈宝",
+        {'keyword': '{keyword}', 'endpoint': 'https://api.habao.net/', 'path': '/resources/api.php?q=',
+         'temp_name': GET_API_4,
+         'id_field': 'id', 'title_field': 'name', 'url_field': 'link', 'pwd_field': 'extcode'})
     def __init__(self, num, function, remark, args: dict):
         self.num = num
         self.function = function
