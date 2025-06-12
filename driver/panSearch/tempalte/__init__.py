@@ -51,6 +51,17 @@ templates={
         },
         "body": ""
     },
+    GET_API_4:{
+        "name": "",
+        "response_json_path": "data",
+        "method": "GET",
+        "url": "{{url}}{{keyword}}",
+        "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "u52r7YXFieLp2tWIFy7AkxLfls2OrizA"
+        },
+        "body": ""
+    },
 }
 
 
