@@ -7,7 +7,9 @@ from driver.common.utils.pan_type_util import get_pan_type
 FUN_PAN = "funPan"
 GET_API = "GET_API"
 GET_API_2 = "GET_API_2"
-GET_API_3 = "GET_API_2"
+GET_API_3 = "GET_API_3"
+GET_API_4 = "GET_API_4"
+
 templates={
     FUN_PAN:{
             "name": "",
