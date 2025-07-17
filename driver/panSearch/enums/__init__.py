@@ -78,11 +78,11 @@ class AsyncEnum(Enum):
         {'keyword': '{keyword}', 'endpoint': 'https://ai-img.ycubbs.cn/', 'path': '/api/duanju/search?name=',
          'temp_name': GET_API,
          'id_field': 'id', 'title_field': 'name', 'url_field': 'url', 'pwd_field': 'extcode'})
-    ITEM_MENGQIANYU = (
-        1030, Template.search, "梦牵云",
-        {'keyword': '{keyword}', 'endpoint': 'https://api.qsdurl.cn/', 'path': '/tool/duanju/?name=',
-         'temp_name': GET_API_2,
-         'id_field': 'id', 'title_field': 'name', 'url_field': 'url', 'pwd_field': 'extcode'})
+    # ITEM_MENGQIANYU = (
+    #     1030, Template.search, "梦牵云",
+    #     {'keyword': '{keyword}', 'endpoint': 'https://api.qsdurl.cn/', 'path': '/tool/duanju/?name=',
+    #      'temp_name': GET_API_2,
+    #      'id_field': 'id', 'title_field': 'name', 'url_field': 'url', 'pwd_field': 'extcode'})
     ITEM_LONGZHU_DJ = (
         1040, Template.search, "龙珠-短剧",
         {'keyword': '{keyword}', 'endpoint': 'https://api.dragonlongzhu.cn/', 'path': '/api/duanju_cat.php?name=',
