@@ -62,4 +62,4 @@ async def search(keyword: str, from_site: list) -> list[SearchResult]:
 
 
 if __name__ == "__main__":
-    asyncio.run(timed_execution(search("重生", None), "全接口搜索"))
+    asyncio.run(timed_execution(search("桃花映江山", None), "全接口搜索"))

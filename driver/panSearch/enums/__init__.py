@@ -48,9 +48,9 @@ class AsyncEnum(Enum):
     ITEM_B = (
         40, KKKOB.search, "kk小悠",
         {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/', 'path': '/api/getXiaoy'})
-    ITEM_D = (
-        60, KKKOB.search, "kk天天追剧",
-        {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/', 'path': '/api/getTTZJB'})
+    # ITEM_D = (
+    #     60, KKKOB.search, "kk天天追剧",
+    #     {'keyword': '{keyword}', 'token': '{gg_token}', 'endpoint': 'http://gg.ksfuwu.com:8091/', 'path': '/api/getTTZJB'})
     ITEM_DYFX = (
         61, KKKOB.search, "kk短剧2",
         {'keyword': '{keyword}', 'token': '{xc_token}', 'endpoint': 'http://xccji.top/', 'path': '/v/api/getDyfx'})
